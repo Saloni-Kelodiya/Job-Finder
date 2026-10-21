@@ -1,0 +1,26 @@
+{
+  "name": "Saloni Kelodiya",
+  "email_to": "kelodiyasaloni@gmail.com",
+  "batch_year": 2025,
+  "title_keywords": ["react", "next.js", "nextjs", "frontend", "front-end", "front end", "full stack", "full-stack", "fullstack", "web developer", "node", "mern", "software engineer", "software developer", "associate engineer", "graduate engineer", "trainee", "analyst programmer", "application developer"],
+  "skills": ["react", "next.js", "node.js", "express", "javascript", "tailwind", "redux", "strapi", "mongodb", "mysql", "postgresql", "rest api", "ssr", "seo", "typescript", "git", "html", "css", "java", "python"],
+  "exclude_title": ["senior", "sr.", "lead", "principal", "staff", "manager", "architect", "director", "head of"],
+  "max_min_years": 1,
+  "max_salary_lpa": 4.5,
+  "preferred_cities": ["bhopal", "indore", "pune", "bangalore", "bengaluru", "hyderabad", "noida", "gurgaon", "gurugram", "delhi", "mumbai", "chennai", "remote", "work from home", "pan india", "india"],
+  "mnc_list": ["tcs", "tata consultancy", "infosys", "wipro", "hcl", "tech mahindra", "cognizant", "accenture", "capgemini", "ibm", "deloitte", "ey ", "kpmg", "pwc", "genpact", "mphasis", "ltimindtree", "lti ", "mindtree", "persistent", "zensar", "cgi", "oracle", "sap ", "microsoft", "amazon", "google", "adobe", "paypal", "dell", "hexaware", "coforge", "nagarro", "epam", "globallogic", "virtusa", "birlasoft"],
+  "trusted_career_domains": ["tcs.com", "ibegin.tcs.com", "careers.tcs.com", "infosys.com", "career.infosys.com", "wipro.com", "careers.wipro.com", "hcltech.com", "careers.hcltech.com", "techmahindra.com", "cognizant.com", "accenture.com", "capgemini.com", "ibm.com", "deloitte.com", "ey.com", "kpmg.com", "pwc.in", "genpact.com", "mphasis.com", "ltimindtree.com", "persistent.com", "zensar.com", "cgi.com", "oracle.com", "microsoft.com", "amazon.jobs", "careers.google.com", "adobe.com", "paypal.com", "dell.com", "hexaware.com", "coforge.com", "nagarro.com", "epam.com", "globallogic.com", "virtusa.com", "birlasoft.com", "naukri.com", "linkedin.com", "indeed.com", "ncs.gov.in", "foundit.in", "internshala.com", "adzuna.in"],
+  "drive_feeds": [
+    "https://www.freshersworld.com/rss/jobs.xml",
+    "https://offcampusjobs4u.com/feed",
+    "https://www.freshersvoice.com/feed",
+    "https://www.fresherslive.com/rss"
+  ],
+  "scam_words": ["registration fee", "security deposit", "pay ", "refundable", "whatsapp", "telegram", "work from home earn", "no interview", "kit charges", "training fee"],
+  "blocked_link_domains": ["bit.ly", "tinyurl.com", "t.me", "wa.me", "chat.whatsapp.com", "shorturl.at", "cutt.ly"],
+  "min_score": 40,
+  "max_items": 20,
+  "max_age_days": 10,
+  "adzuna_search": ["react developer fresher", "next.js developer", "full stack developer fresher", "frontend developer fresher", "software engineer fresher", "web developer fresher"],
+  "adzuna_where": ["", "bhopal", "indore", "pune", "bangalore", "hyderabad", "noida"]
+}

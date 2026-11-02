@@ -77,6 +77,29 @@ def adzuna():
     return out
 
 
+def jooble():
+    """India jobs via Jooble. Free key: jooble.org/api/about -> JOOBLE_KEY."""
+    key = os.getenv("JOOBLE_KEY")
+    if not key:
+        print("JOOBLE_KEY not set: skipping Jooble", file=sys.stderr); return []
+    out = []
+    for q in CFG["jooble_search"]:
+        for where in CFG["jooble_where"]:
+            try:
+                r = requests.post(f"https://jooble.org/api/{key}", headers=UA, timeout=30,
+                                  json={"keywords": q, "location": where, "page": 1})
+                r.raise_for_status()
+                d = r.json()
+            except Exception as e:
+                print("jooble failed:", e, file=sys.stderr); continue
+            for j in d.get("jobs", []):
+                out.append(dict(id=f"jooble-{j.get('id') or j.get('link')}", kind="job", title=strip(j.get("title")),
+                                company=j.get("company", ""), location=j.get("location") or where or "India",
+                                url=j.get("link", ""), desc=strip(j.get("snippet")),
+                                date=parse_date(j.get("updated")), source="Jooble", salary_lpa=None))
+    return out
+
+
 def feeds():
     out = []
     for f in CFG["drive_feeds"]:
@@ -180,19 +203,30 @@ def render(items):
 
 
 def send_email(subject, body):
-    user, pw = os.getenv("GMAIL_USER"), os.getenv("GMAIL_APP_PASSWORD")
+    user = (os.getenv("GMAIL_USER") or "").strip()
+    pw = (os.getenv("GMAIL_APP_PASSWORD") or "").replace(" ", "").strip()
     if not (user and pw):
         print("GMAIL_USER / GMAIL_APP_PASSWORD not set: email skipped", file=sys.stderr); return
     msg = MIMEMultipart("alternative")
     msg["Subject"], msg["From"], msg["To"] = subject, user, CFG["email_to"]
     msg.attach(MIMEText(body, "html"))
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
-        s.login(user, pw); s.sendmail(user, [CFG["email_to"]], msg.as_string())
+    last = None
+    for mode in ("ssl465", "tls587"):
+        try:
+            if mode == "ssl465":
+                s = smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30)
+            else:
+                s = smtplib.SMTP("smtp.gmail.com", 587, timeout=30); s.starttls()
+            s.login(user, pw); s.sendmail(user, [CFG["email_to"]], msg.as_string()); s.quit()
+            print("email sent via", mode); return
+        except Exception as e:
+            last = e; print(f"email via {mode} failed: {e!r}", file=sys.stderr)
+    raise SystemExit(f"Email failed: {last!r}. Check GMAIL_USER (full address) and GMAIL_APP_PASSWORD (16-char App Password, not your normal password).")
 
 
 def main():
     pool = {}
-    for fn in (adzuna, feeds):
+    for fn in (jooble, adzuna, feeds):
         for j in fn():
             pool.setdefault(j["id"], j)
     try:
